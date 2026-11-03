@@ -20,6 +20,24 @@ Installation
 Be aware, the [installation](https://docs.facefusion.io/installation) needs technical skills and is not recommended for beginners. In case you are not comfortable using a terminal, our [Windows Installer](http://windows-installer.facefusion.io) and [macOS Installer](http://macos-installer.facefusion.io) get you started.
 
 
+macOS Acceleration
+------------------
+
+The standard macOS ONNX Runtime package includes the CoreML execution provider. FaceFusion automatically prefers CoreML when it is available, and configures it for fast prediction with a model cache. On Apple Silicon, CoreML can use the CPU, GPU, and Neural Engine; operators it cannot run may fall back to the CPU. CoreML requires macOS 10.15 or newer.
+
+Confirm that the installed runtime includes CoreML:
+
+```
+python -c "import onnxruntime as ort; print(ort.get_available_providers())"
+```
+
+The output should include `CoreMLExecutionProvider`. To select it explicitly when running FaceFusion:
+
+```
+python facefusion.py run --execution-providers coreml
+```
+
+
 Usage
 -----
 
