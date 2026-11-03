@@ -24,7 +24,7 @@ fi
 if command -v "$python_bin" >/dev/null 2>&1 \
 	&& "$python_bin" -c 'import onnxruntime as ort; assert "CoreMLExecutionProvider" in ort.get_available_providers()' >/dev/null 2>&1 \
 	&& "$python_bin" facefusion.py run --help >/dev/null 2>&1; then
-	exec "$python_bin" facefusion.py run "$@" --execution-providers coreml --open-browser
+	exec "$python_bin" facefusion.py run "$@" --execution-providers coreml cpu --open-browser
 fi
 
 if command -v uv >/dev/null 2>&1; then
@@ -34,7 +34,7 @@ if command -v uv >/dev/null 2>&1; then
 		--no-project \
 		--python 3.12 \
 		--with-requirements "$project_dir/requirements.txt" \
-		python facefusion.py run "$@" --execution-providers coreml --open-browser
+		python facefusion.py run "$@" --execution-providers coreml cpu --open-browser
 fi
 
 printf 'Python environment %s is not ready with CoreML and FaceFusion dependencies, and uv is unavailable.\n' "$python_bin" >&2
