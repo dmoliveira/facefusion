@@ -37,6 +37,8 @@ The output should include `CoreMLExecutionProvider`. To select it explicitly whe
 python facefusion.py run --execution-providers coreml
 ```
 
+For a one-command launch, use `./run_mac.sh`. It opens the UI in your browser, uses the active Python environment if it has CoreML and the FaceFusion dependencies, and otherwise falls back to `uv` with the pinned requirements and Python 3.12. The first launch may install Python packages and download model files. Install `curl`, `ffmpeg`, and `ffprobe` first. Additional FaceFusion options can be passed through the script.
+
 
 Usage
 -----
