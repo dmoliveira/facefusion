@@ -23,7 +23,7 @@ Be aware, the [installation](https://docs.facefusion.io/installation) needs tech
 macOS Acceleration
 ------------------
 
-The standard macOS ONNX Runtime package includes the CoreML execution provider. FaceFusion automatically prefers CoreML when it is available, and configures it for fast prediction with a model cache. On Apple Silicon, CoreML can use the CPU, GPU, and Neural Engine; operators it cannot run may fall back to the CPU. CoreML requires macOS 10.15 or newer.
+The standard macOS ONNX Runtime package includes the CoreML execution provider. FaceFusion can use CoreML for fast prediction with a model cache. On Apple Silicon, CoreML can use the CPU, GPU, and Neural Engine. Keep CPU in the provider list as a fallback for operators CoreML cannot run. CoreML requires macOS 10.15 or newer.
 
 Confirm that the installed runtime includes CoreML:
 
@@ -34,10 +34,10 @@ python -c "import onnxruntime as ort; print(ort.get_available_providers())"
 The output should include `CoreMLExecutionProvider`. To select it explicitly when running FaceFusion:
 
 ```
-python facefusion.py run --execution-providers coreml
+python facefusion.py run --execution-providers coreml cpu
 ```
 
-For a one-command launch, use `./run_mac.sh`. It opens the UI in your browser, uses the active Python environment if it has CoreML and the FaceFusion dependencies, and otherwise falls back to `uv` with the pinned requirements and Python 3.12. The first launch may install Python packages and download model files. Install `curl`, `ffmpeg`, and `ffprobe` first. Additional FaceFusion options can be passed through the script.
+For a one-command launch, use `./run_mac.sh`. It opens the UI in your browser, requests CoreML first with CPU fallback, uses the active Python environment if it has CoreML and the FaceFusion dependencies, and otherwise falls back to `uv` with the pinned requirements and Python 3.12. The first launch may install Python packages and download model files. Install `curl`, `ffmpeg`, and `ffprobe` first. Additional FaceFusion options can be passed through the script.
 
 
 Usage
